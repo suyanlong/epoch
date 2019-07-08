@@ -1,0 +1,2 @@
+mysql = "mysql://root@127.0.0.1:3306/test"
+node_id = 0
