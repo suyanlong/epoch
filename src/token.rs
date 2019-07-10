@@ -2,6 +2,8 @@ use chrono::Utc;
 use jwt::errors::Result;
 use jwt::{decode, encode, Header, Validation};
 
+const TIME: i64 = 2 * 24 * 60;
+
 /// Our claims struct, it needs to derive `Serialize` and/or `Deserialize`
 #[derive(Debug, Serialize, Deserialize, Default)]
 pub struct Token {
@@ -13,7 +15,7 @@ impl Token {
     pub fn new(id: usize) -> Self {
         Token {
             id,
-            exp: (Utc::now().timestamp() + 2 * 24 * 60) as usize,
+            exp: (Utc::now().timestamp() + TIME) as usize,
         }
     }
 
@@ -38,7 +40,7 @@ mod tests {
     fn test_claims() {
         let my_claims = Token {
             id: 123456789,
-            exp: (Utc::now().timestamp() + 2 * 24 * 60) as usize,
+            exp: (Utc::now().timestamp() + TIME) as usize,
         };
 
         let token = encode(&Header::default(), &my_claims, "epoch-secret".as_ref()).unwrap();
