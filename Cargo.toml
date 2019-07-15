@@ -40,3 +40,6 @@ askama = "0.8"
 
 # 命令行库
 clap = { version = "2", features = ["yaml"] }
+
+# 错误处理
+failure = "0.1"
